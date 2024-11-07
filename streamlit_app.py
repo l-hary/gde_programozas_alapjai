@@ -1,7 +1,7 @@
 import streamlit as st
 
-import chart_generator as cgen
-import data_acquisition as dacq
+import data.data_handler as dacq
+import visualization.chart_generator as cgen
 
 
 # ? remove unused main
