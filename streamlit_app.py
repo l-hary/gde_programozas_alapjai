@@ -1,7 +1,8 @@
 import streamlit as st
 
-import data.data_handler as dacq
-import visualization.chart_generator as cgen
+import analysis.linear_regression
+import data.data_model
+import visualization.chart_generator
 
 
 # ? remove unused main
@@ -11,20 +12,13 @@ def main() -> None:
 
 def run_streamlit_app() -> None:
 
-    # TODO: change hardcoded file path to a command line argument
-    # ? use st.file_uploader
-    ksh_data = dacq.load_and_preprocess_data("data/stadat-lak0001.xlsx")
+    ksh_data = data.data_model.StatisticalData("data/stadat-lak0001.xlsx")
+    lr = analysis.linear_regression.FittedModel(ksh_data.x, ksh_data.y)
+    lr_chart = visualization.chart_generator.generate_lr_chart(
+        ksh_data.x, ksh_data.y, lr.prediction
+    )
 
-    # assign x (feature) and y (target)
-    x = ksh_data[["Lakáspiaci tranzakció"]]  # double brackets to get a dataframe
-    y = ksh_data["Folyósított lakáshitel, db"]  # single brackets to get a series
-
-    fitted_model = cgen.generate_fitted_lr_model(x, y)
-    lr_data = cgen.get_lr_model_data(fitted_model, x, y)
-    prediction = lr_data["prediction"]
-    lr_chart = cgen.generate_lr_chart(x, y, prediction)
-
-    st.write(f"R squared is {lr_data["r_squared"]: .2f}")
+    st.write(f"R squared is {lr.r_squared: .2f}")
     st.write(lr_chart)
 
 
