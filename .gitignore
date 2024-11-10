@@ -164,4 +164,5 @@ cython_debug/
 # Excel tmp file
 ~*.xlsx
 
+.pylintrc
 .DS_Store
