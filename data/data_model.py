@@ -14,11 +14,15 @@ class StatisticalData:
     line_x: pd.Series = field(init=False)
     line_y: pd.Series = field(init=False)
 
-    def __post_init__(self, file_path) -> None:
+    def __post_init__(self, file_path: str) -> None:
         self.data = load_and_preprocess_data(file_path)
         self.lr_x = self.data[["Lakáspiaci tranzakció"]]
         self.lr_y = self.data["Folyósított lakáshitel, db"]
         self.line_x = self.data["Év"]
+        self.line_y = self.data["Lakásállomány, január 1."]
 
-    def set_line_y(self, column) -> None:
+    def set_line_y(self, column: str) -> None:
         self.line_y = self.data[column]
+
+    def set_line_x(self, column: str) -> None:
+        self.line_x = self.data[column]
