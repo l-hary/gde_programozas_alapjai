@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import seaborn as sns
 
 
 def generate_lr_chart(
@@ -26,3 +27,11 @@ def generate_lr_chart(
     ax.set_ylabel("loans")
     ax.legend()
     return fig
+
+
+def generate_line_chart():
+    pass
+
+
+def generate_scatterplot() -> plt.Figure:
+    pass

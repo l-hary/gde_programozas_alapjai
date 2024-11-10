@@ -9,10 +9,16 @@ from data.data_handler import load_and_preprocess_data
 class StatisticalData:
     file_path: InitVar[str]
     data: pd.DataFrame = field(init=False)
-    x: pd.DataFrame = field(init=False)
-    y: pd.Series = field(init=False)
+    lr_x: pd.DataFrame = field(init=False)
+    lr_y: pd.Series = field(init=False)
+    line_x: pd.Series = field(init=False)
+    line_y: pd.Series = field(init=False)
 
     def __post_init__(self, file_path) -> None:
         self.data = load_and_preprocess_data(file_path)
-        self.x = self.data[["Lakáspiaci tranzakció"]]
-        self.y = self.data["Folyósított lakáshitel, db"]
+        self.lr_x = self.data[["Lakáspiaci tranzakció"]]
+        self.lr_y = self.data["Folyósított lakáshitel, db"]
+        self.line_x = self.data["Év"]
+
+    def set_line_y(self, column) -> None:
+        self.line_y = self.data[column]

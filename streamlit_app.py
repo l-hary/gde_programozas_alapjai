@@ -13,12 +13,12 @@ def main() -> None:
 def run_streamlit_app() -> None:
 
     ksh_data = data.data_model.StatisticalData("data/stadat-lak0001.xlsx")
-    lr = analysis.linear_regression.FittedModel(ksh_data.x, ksh_data.y)
+    lr_model = analysis.linear_regression.FittedModel(ksh_data.lr_x, ksh_data.lr_y)
     lr_chart = visualization.chart_generator.generate_lr_chart(
-        ksh_data.x, ksh_data.y, lr.prediction
+        ksh_data.lr_x, ksh_data.lr_y, lr_model.prediction
     )
 
-    st.write(f"R squared is {lr.r_squared: .2f}")
+    st.write(f"R squared is {lr_model.r_squared: .2f}")
     st.write(lr_chart)
 
 
