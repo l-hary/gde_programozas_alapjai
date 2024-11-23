@@ -37,6 +37,17 @@ def generate_lr_chart(
 
 
 def generate_line_chart(x: pd.Series, y: pd.Series, ax: plt.Axes = None) -> plt.Axes:
+    """
+    Generate a line chart for the given data.
+
+    Parameters:
+    x (pd.Series): Series containing the x-axis data.
+    y (pd.Series): Series containing the y-axis data.
+    ax (plt.Axes, optional): Matplotlib Axes object to plot on. Defaults to None.
+
+    Returns:
+    plt.Axes: Matplotlib Axes object containing the chart.
+    """
     if ax is None:
         ax = plt.gca()  # creates a new ax if not provided
     x = x.astype(str)
@@ -66,4 +77,10 @@ def generate_line_chart(x: pd.Series, y: pd.Series, ax: plt.Axes = None) -> plt.
 
 
 def generate_scatterplot() -> plt.Figure:
+    """
+    Generate a scatter plot.
+
+    Returns:
+    plt.Figure: Matplotlib figure object containing the scatter plot.
+    """
     pass
