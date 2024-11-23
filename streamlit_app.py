@@ -9,11 +9,11 @@ import visualization.chart_generator
 
 def run_streamlit_app() -> None:
     st.set_page_config(
-        page_title="Programozas Alapok",
+        page_title="Programozási Alapok",
         page_icon=":computer:",
     )
     st.title(":blue[Gábor Dénes Egyetem 2024]")
-    st.write(":green[Programozas Alapok Projektfeladatot készítették:]")
+    st.write(":green[Programozási Alapok Projektfeladatot készítették:]")
     st.write(
         ":green[Háry László - GA790T, Ashwood Morrigan- GMQUVO, Bukur Norbert - NZIE3G]"
     )
