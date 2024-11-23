@@ -7,6 +7,14 @@ import data.data_model
 import visualization.chart_generator
 
 
+st.set_page_config(page_title="Programozas Alapok", page_icon=":computer:", )
+
+
+st.title(':blue[Gábor Dénes Egyetem 2024]')
+st.write(':green[Programozas Alapok Projektfeladatot készítették:]')
+st.write(':green[Háry László - GA790T, Ashwood Morrigan- GMQUVO, Bukur Norbert - NZIE3G]')
+
+
 # ? remove unused main
 def main() -> None:
     pass
