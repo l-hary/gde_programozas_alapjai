@@ -7,12 +7,16 @@ import data.data_model
 import visualization.chart_generator
 
 
-# ? remove unused main
-def main() -> None:
-    pass
-
-
 def run_streamlit_app() -> None:
+    st.set_page_config(
+        page_title="Programozas Alapok",
+        page_icon=":computer:",
+    )
+    st.title(":blue[Gábor Dénes Egyetem 2024]")
+    st.write(":green[Programozas Alapok Projektfeladatot készítették:]")
+    st.write(
+        ":green[Háry László - GA790T, Ashwood Morrigan- GMQUVO, Bukur Norbert - NZIE3G]"
+    )
     sns.set_style("whitegrid")
     fig, axes = plt.subplots(3, figsize=(8, 8))
     ksh_data = data.data_model.StatisticalData("data/stadat-lak0001.xlsx")
@@ -28,7 +32,3 @@ def run_streamlit_app() -> None:
     plt.show()
     st.write(f"R squared is {lr_model.r_squared: .2f}")
     st.write(fig)
-
-
-if __name__ == "__main__":
-    main()

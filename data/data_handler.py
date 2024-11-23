@@ -41,6 +41,8 @@ def _drop_unnecessary_columns(file_path: str, df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+# TODO add more robust error handling
+# TODO use pd.diff() instead of pd.shift()
 def add_year_on_year_change(
     df: pd.DataFrame, target: str | list, result: str | list = None
 ) -> None:
