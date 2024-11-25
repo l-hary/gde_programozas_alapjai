@@ -16,13 +16,14 @@ def run_streamlit_app() -> None:
     st.write(
         ":green[Háry László - GA790T, Ashwood Morrigan- GMQUVO, Bukur Norbert - NZIE3G]"
     )
+    
 
-    fig, axes = plt.subplots(3, figsize=(8, 8))
     # Load data and models
     ksh_data = data.data_model.StatisticalData("data/stadat-lak0001.xlsx")
     lr_model = analysis.linear_regression.FittedModel(ksh_data.lr_x, ksh_data.lr_y)
 
     # Generate charts
+    fig, axes = plt.subplots(3, figsize=(8, 8))
     lr_chart = visualization.chart_generator.generate_lr_chart(
         ksh_data.lr_x, ksh_data.lr_y, lr_model.prediction, axes[0]
     )
@@ -30,5 +31,7 @@ def run_streamlit_app() -> None:
         ksh_data.line_x, ksh_data.line_y, axes[1]
     )
     visualization.chart_generator.set_chart_style()
+    
     st.write(f"R squared is {lr_model.r_squared: .2f}")
     st.pyplot(fig)
+
