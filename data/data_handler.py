@@ -1,3 +1,11 @@
+"""
+This module provides functions to load, preprocess, and manipulate data from Excel files.
+It includes functions to drop unnecessary columns, handle errors, and calculate 
+year-on-year changes.
+"""
+
+# ? pylint complains about error handling, fix
+
 import pandas as pd
 
 
@@ -14,7 +22,7 @@ def load_and_preprocess_data(file_path: str) -> pd.DataFrame:
     # Using Excel file, as csv from KSH have encoding issues
     try:
         df = pd.read_excel(file_path, skiprows=1)
-        df = _drop_unnecessary_columns(file_path, df)
+        df = _drop_unnecessary_columns(df)
         df = df.rename(columns={"Lakásállomány, január 1.": "Lakásállomány"})
     except FileNotFoundError:
         raise FileNotFoundError("The specified file was not found.")
@@ -25,7 +33,7 @@ def load_and_preprocess_data(file_path: str) -> pd.DataFrame:
     return df
 
 
-def _drop_unnecessary_columns(file_path: str, df: pd.DataFrame) -> pd.DataFrame:
+def _drop_unnecessary_columns(df: pd.DataFrame) -> pd.DataFrame:
     """
     Drops rows where some of the data is missing and the last totals row.
 
@@ -41,8 +49,7 @@ def _drop_unnecessary_columns(file_path: str, df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-# TODO add more robust error handling
-# TODO use pd.diff() instead of pd.shift()
+# ? use pd.diff() instead of pd.shift()
 def add_year_on_year_change(
     df: pd.DataFrame, target: str | list, result: str | list = None
 ) -> None:

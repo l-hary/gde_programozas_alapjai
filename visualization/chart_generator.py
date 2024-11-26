@@ -1,3 +1,14 @@
+"""
+This module provides functions to generate various types of charts for housing market analysis.
+
+Functions:
+----------
+- set_chart_style: Set the style for the charts using seaborn and matplotlib settings.
+- generate_lr_chart: Generate a chart for linear regression results.
+- generate_line_chart: Generate a line chart for the given data.
+- generate_bar_chart: Generate a bar chart for the given data.
+"""
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -9,7 +20,6 @@ TITLE_COLOR = "#202020"
 
 
 def set_chart_style() -> None:
-
     """
     Set the style for the charts using seaborn and matplotlib settings.
     """
@@ -48,7 +58,6 @@ def generate_lr_chart(
 
     ax.set_xlabel("Lakáspiaci tranzakciók")
     ax.set_ylabel("Folyósított lakáshitelek ")
-
 
     ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, _: f"{x:,.0f}"))
     ax.get_xaxis().set_major_formatter(plt.FuncFormatter(lambda x, _: f"{x:,.0f}"))
@@ -105,6 +114,7 @@ def generate_line_chart(x: pd.Series, y: pd.Series, ax: plt.Axes = None) -> plt.
         )
     return ax
 
+
 def generate_bar_chart(x: pd.Series, y: pd.Series, ax: plt.Axes = None) -> plt.Axes:
     """
     Generate a bar chart for the given data.
@@ -142,4 +152,3 @@ def generate_bar_chart(x: pd.Series, y: pd.Series, ax: plt.Axes = None) -> plt.A
         )
 
     return ax
-
