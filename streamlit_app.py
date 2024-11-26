@@ -30,11 +30,11 @@ def run_streamlit_app() -> None:
         ksh_data.lr_independent_x, ksh_data.lr_dependent_y, lr_model.prediction, axes[0]
     )
     available_housing = visualization.chart_generator.generate_line_chart(
-        ksh_data.line_x, ksh_data.line_y, axes[1]
+        ksh_data.x_axis, ksh_data.y_axis, axes[1]
     )
-
+    ksh_data.set_y_axis("Épített lakás változása")
     new_builds_yoy_change = visualization.chart_generator.generate_bar_chart(
-        ksh_data.data[1:], "Év", "Épített lakás változása", axes[2]
+        x=ksh_data.x_axis[1:], y=ksh_data.y_axis, ax=axes[2]
     )
 
     st.write(f"R squared is {lr_model.r_squared: .2f}")
