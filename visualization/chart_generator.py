@@ -4,7 +4,7 @@ import pandas as pd
 import seaborn as sns
 
 # Declaring global palette variable
-PALETTE = sns.color_palette("coolwarm")
+PALETTE = sns.color_palette("crest")
 TITLE_COLOR = "#202020"
 
 
@@ -47,7 +47,13 @@ def generate_lr_chart(
     ax.get_xaxis().set_major_formatter(plt.FuncFormatter(lambda x, _: f"{x:,.0f}"))
     ax.legend()
 
-    # Add a title
+    # több gridline
+    
+    ax.grid(color="gray", linestyle="-", linewidth=0.5, alpha=0.7) #nagyobb grid vonalak
+    ax.minorticks_on()
+    ax.grid(which="minor", color="lightgray", linestyle=":", linewidth=0.5)  #sűrűbb halványabb kis grid vonalak
+
+    # cim
     ax.set_title("Lineáris regresszió eredményei", fontsize=14, color=TITLE_COLOR)
 
     return ax
@@ -72,10 +78,13 @@ def generate_line_chart(x: pd.Series, y: pd.Series, ax: plt.Axes = None) -> plt.
     sns.lineplot(x=x, y=y, ax=ax, linestyle="--", marker="o", color=PALETTE[4])
     ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
 
+    #gridvonalak, sajnos még mindig nem tudom mi az magyarul 
+    ax.grid(color="gray", linestyle="--", linewidth=0.5, alpha=0.7)
+    
     # Set fixed stepping for y-axis
     ax.yaxis.set_major_locator(plt.MultipleLocator(100000))
     ax.set_ylim(float(y.min()) * 0.975, float(y.max()) * 1.025)
-    # Add labels and title
+    # címkék és címek
     ax.set_xlabel("Évek", fontsize=12, color=TITLE_COLOR)
     ax.set_ylabel("Lakásállomány (db)", fontsize=12, color=TITLE_COLOR)
     ax.set_title("Lakásállomány alakulása évek szerint", fontsize=14, color=TITLE_COLOR)
