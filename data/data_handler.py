@@ -59,9 +59,7 @@ def add_year_on_year_change(
     """
 
     def add_default_suffix(df, target):
-        df[f"{target} változása az előző évhez képest"] = df[target] - df[target].shift(
-            1
-        )
+        df[f"{target} változása"] = df[target] - df[target].shift(1)
 
     # checks if a single column name was given
     if isinstance(target, str):
