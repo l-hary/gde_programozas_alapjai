@@ -14,7 +14,7 @@ def run_streamlit_app() -> None:
     st.title(":blue[Gábor Dénes Egyetem 2024]")
     st.write(":green[Programozási Alapok Projektfeladatot készítették:]")
     st.write(
-        ":green[Háry László - GA790T, Ashwood Morrigan- GMQUVO, Bukur Norbert - NZIE3G]"
+        ":green[Balom Soma - T3JIXF, Háry László - GA790T, Ashwood Morrigan- GMQUVO, Bukur Norbert - NZIE3G]"
     )
     
 
