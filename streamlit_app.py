@@ -45,6 +45,7 @@ def run_streamlit_app() -> None:
     )
 
     # Write to Streamlit app
+    visualization.chart_generator.set_chart_style()
     st.title(":blue[Gábor Dénes Egyetem 2024]")
     st.write(":green[Programozási Alapok Projektfeladatot készítették:]")
     st.write(
@@ -52,5 +53,4 @@ def run_streamlit_app() -> None:
         Bukur Norbert - NZIE3G]"
     )
     st.write(f"R squared is {lr_model.r_squared: .2f}")
-    visualization.chart_generator.set_chart_style()
     st.pyplot(fig)
