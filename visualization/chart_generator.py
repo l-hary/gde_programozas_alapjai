@@ -3,6 +3,17 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 
+# Declaring global palette variable
+PALETTE = sns.color_palette("coolwarm")
+TITLE_COLOR = "#202020"
+
+
+def set_chart_style() -> None:
+    sns.set_theme(style="darkgrid")
+    plt.rcParams["font.family"] = "sans-serif"
+    plt.rcParams["font.sans-serif"] = ["Arial", "Helvetica"]
+    plt.tight_layout()
+
 
 def generate_lr_chart(
     x: pd.DataFrame,
@@ -19,20 +30,26 @@ def generate_lr_chart(
     prediction (np.ndarray): Predicted values from the model.
 
     Returns:
-    plt.Figure: Matplotlib figure object containing the chart.
+    plt.Axes: Matplotlib axes object with the chart.
     """
     if ax is None:  # creates a new ax if not provided
         ax = plt.gca()
-    ax.scatter(x, y, color="blue", label="Adatpontok")
-    ax.plot(x, prediction, color="red", label="Regressziós egyenes")
+
+    # Plot data points and regression line
+    ax.scatter(x, y, color=PALETTE[1], label="Adatpontok")
+    ax.plot(x, prediction, color=PALETTE[5], label="Regressziós egyenes")
 
     # Format axes
-    ax.set_xlabel("Lakáspiaci tranzakciók száma")
-    ax.set_ylabel("Folyósított lakáshitelek száma")
+    ax.set_xlabel("Lakáspiaci tranzakciók")
+    ax.set_ylabel("Folyósított lakáshitelek ")
+
     ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, _: f"{x:,.0f}"))
     ax.get_xaxis().set_major_formatter(plt.FuncFormatter(lambda x, _: f"{x:,.0f}"))
     ax.legend()
-    # TODO add title
+
+    # Add a title
+    ax.set_title("Lineáris regresszió eredményei", fontsize=14, color=TITLE_COLOR)
+
     return ax
 
 
@@ -52,14 +69,16 @@ def generate_line_chart(x: pd.Series, y: pd.Series, ax: plt.Axes = None) -> plt.
         ax = plt.gca()  # creates a new ax if not provided
     x = x.astype(str)
 
-    sns.lineplot(x=x, y=y, ax=ax, linestyle="--", marker="o", color="salmon")
+    sns.lineplot(x=x, y=y, ax=ax, linestyle="--", marker="o", color=PALETTE[4])
     ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
 
     # Set fixed stepping for y-axis
     ax.yaxis.set_major_locator(plt.MultipleLocator(100000))
-    ax.set_ylim(bottom=4200000, top=4700000)
-    # TODO add labels and title
-
+    ax.set_ylim(float(y.min()) * 0.95, float(y.max()) * 1.05)
+    # Add labels and title
+    ax.set_xlabel("Évek", fontsize=12, color=TITLE_COLOR)
+    ax.set_ylabel("Lakásállomány (db)", fontsize=12, color=TITLE_COLOR)
+    ax.set_title("Lakásállomány alakulása évek szerint", fontsize=14, color=TITLE_COLOR)
     # Format y-axis numbers
     ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, _: f"{x:,.0f}"))
 
@@ -71,16 +90,24 @@ def generate_line_chart(x: pd.Series, y: pd.Series, ax: plt.Axes = None) -> plt.
             textcoords="offset points",
             xytext=(0, 5),
             ha="center",
+            fontsize=10,
             rotation=50,
         )
     return ax
 
 
-def generate_scatterplot() -> plt.Figure:
-    """
-    Generate a scatter plot.
+def generate_bar_chart(df, x, y, ax):
+    sns.barplot(x=x, y=y, data=df)
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
 
-    Returns:
-    plt.Figure: Matplotlib figure object containing the scatter plot.
-    """
-    pass
+    for p in ax.patches:
+        ax.annotate(
+            text=f"{p.get_height():,.0f}",
+            xy=(p.get_x() + p.get_width() / 2.0, p.get_height()),
+            va="center",
+            ha="center",
+            fontsize=10,
+            rotation=50,
+        )
+
+    return ax
