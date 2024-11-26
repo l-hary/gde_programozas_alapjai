@@ -9,9 +9,11 @@ TITLE_COLOR = "#202020"
 
 
 def set_chart_style() -> None:
+
     """
     Set the style for the charts using seaborn and matplotlib settings.
     """
+
     sns.set_theme(style="darkgrid")
     plt.rcParams["font.family"] = "sans-serif"
     plt.rcParams["font.sans-serif"] = ["Arial", "Helvetica"]
@@ -43,8 +45,10 @@ def generate_lr_chart(
     ax.plot(x, prediction, color=PALETTE[5], label="Regressziós egyenes")
 
     # Format axes
+
     ax.set_xlabel("Lakáspiaci tranzakciók")
     ax.set_ylabel("Folyósított lakáshitelek ")
+
 
     ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, _: f"{x:,.0f}"))
     ax.get_xaxis().set_major_formatter(plt.FuncFormatter(lambda x, _: f"{x:,.0f}"))
@@ -80,8 +84,10 @@ def generate_line_chart(x: pd.Series, y: pd.Series, ax: plt.Axes = None) -> plt.
 
     # Set fixed stepping for y-axis
     ax.yaxis.set_major_locator(plt.MultipleLocator(100000))
+
     ax.set_ylim(float(y.min()) * 0.95, float(y.max()) * 1.05)
     # Add title
+
     ax.set_title("Lakásállomány alakulása évek szerint", fontsize=14, color=TITLE_COLOR)
     # Format y-axis numbers
     ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, _: f"{x:,.0f}"))
@@ -98,7 +104,6 @@ def generate_line_chart(x: pd.Series, y: pd.Series, ax: plt.Axes = None) -> plt.
             rotation=50,
         )
     return ax
-
 
 def generate_bar_chart(x: pd.Series, y: pd.Series, ax: plt.Axes = None) -> plt.Axes:
     """
@@ -137,3 +142,4 @@ def generate_bar_chart(x: pd.Series, y: pd.Series, ax: plt.Axes = None) -> plt.A
         )
 
     return ax
+
